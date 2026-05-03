@@ -310,12 +310,27 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card p-4 menu-card shadow-sm h-100">
-                        <div class="fs-1 mb-2">📝</div>
-                        <h5 class="fw-bold">Pengajuan Izin</h5>
-                        <p class="text-muted small">Cek status <strong>Disetujui</strong>.</p>
-                        <button class="btn btn-warning w-100 mt-2 text-white">Buat Pengajuan</button>
-                    </div>
+                    <a href="{{ route('izin.index') }}" class="text-decoration-none text-dark">
+                        <div class="card p-4 menu-card shadow-sm h-100">
+                            <div class="fs-1 mb-2">📝</div>
+                            <h5 class="fw-bold">Pengajuan Izin</h5>
+
+                            <div class="text-start mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted small">Status Terakhir:</span>
+                                    <span class="badge bg-warning text-dark">Menunggu</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted small">Total Izin Bln Ini:</span>
+                                    <span class="fw-bold small">2 Hari</span>
+                                </div>
+                            </div>
+
+                            <div class="btn btn-outline-warning w-100 mt-3">
+                                Buat Pengajuan
+                            </div>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4">

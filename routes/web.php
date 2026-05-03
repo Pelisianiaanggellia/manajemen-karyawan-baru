@@ -17,10 +17,20 @@ Route::get('/', function (Request $request) {
     return view('beranda');
 });
 
+// Route untuk halaman Absensi //
 Route::get('/absensi/riwayat', function () {
     return view('Absen');
 })->name('absensi.riwayat');
 
+// Route untuk halaman pengajuan izin //
+Route::get('/pengajuan-izin', function () {
+    return view('PengajuanSurat');
+})->name('izin.index');
+
+// untuk memproses pengiriman data ke HRD //
+Route::post('/pengajuan-izin', function () {
+    return redirect()->route('pengajuan.riwayat');
+})->name('izin.store');
 
 // LOGOUT
 Route::post('/logout', function (Request $request) {
@@ -32,7 +42,3 @@ Route::post('/logout', function (Request $request) {
     // Redirect kembali ke halaman utama atau login
     return redirect('/');
 })->name('logout');
-
-Route::get('/pengajuan-izin', function () {
-    return view('izin');
-})->name('izin.index');

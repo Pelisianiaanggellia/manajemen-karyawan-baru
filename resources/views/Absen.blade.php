@@ -23,14 +23,14 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm rounded-4 mb-4">
                 <div class="card-body">
-                    <h6 class="fw-bold mb-3">Ringkasan April 2026</h6>
+                    <h6 class="fw-bold mb-3" id="ringkasan-title">Ringkasan April 2026</h6>
                     <div class="d-flex align-items-center mb-3">
                         <div class="rounded-circle bg-success-subtle p-2 me-3">
                             <i class="bi bi-check-circle text-success"></i>
                         </div>
                         <div>
                             <p class="mb-0 small text-muted">Hadir</p>
-                            <span class="fw-bold">28 Hari</span>
+                            <span class="fw-bold" id="total-hadir">28 Hari</span>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
@@ -39,7 +39,7 @@
                         </div>
                         <div>
                             <p class="mb-0 small text-muted">Izin/Sakit</p>
-                            <span class="fw-bold">2 Hari</span>
+                            <span class="fw-bold" id="total-izin">2 Hari</span>
                         </div>
                     </div>
                 </div>
@@ -48,85 +48,33 @@
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body">
                     <h6 class="fw-bold mb-3 text-danger">Catatan Ketidakhadiran</h6>
-                    <div class="border-start border-3 border-warning ps-3">
-                        <p class="mb-1 fw-bold small">05 - 06 April 2026</p>
-                        <p class="text-muted small mb-0">Izin Sakit (Gejala Typus).</p>
+                    <div id="catatan-list">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/locales/id.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/locales/id.global.min.js"></script>
 
-<style>
-    body {
-        background-color: #f8f9fa;
-        overflow-x: hidden;
-    }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
 
-    /* 1. Perbaikan Kotak Putih (Card) */
-    .card {
-        border: none;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        background: #fff;
-    }
-
-    /* 2. Mengecilkan ukuran teks hari agar tidak meluber */
-    .fc-col-header-cell-cushion {
-        padding: 10px 2px !important;
-        font-size: 0.75rem;
-        /* Ukuran teks hari dikecilkan sedikit */
-        font-weight: 700;
-        color: #444;
-        text-transform: uppercase;
-        text-decoration: none !important;
-    }
-
-    /* 3. Menyesuaikan tinggi kotak tanggal */
-    .fc-daygrid-day-frame {
-        min-height: 85px !important;
-    }
-
-    /* 4. Menghilangkan garis bawah pada angka */
-    .fc-daygrid-day-number {
-        text-decoration: none !important;
-        font-size: 0.85rem;
-        padding: 8px !important;
-        color: #888;
-    }
-
-    /* Agar kalender pas dengan lebar card */
-    #calendar {
-        max-width: 100%;
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'id',
-            height: 'auto', // Ini wajib biar kotak putihnya narik ke bawah mengikuti isi
-            contentHeight: 'auto',
-            dayHeaderFormat: {
-                weekday: 'long'
-            },
-
-            // Pengaturan header agar lebih rapi
-            headerToolbar: {
-                left: 'title',
-                center: '',
-                right: 'today prev,next'
-            },
-
-            events: [{
+            var dataEvents = [{
                     title: 'Hadir',
-                    start: '2026-05-01',
+                    start: '2026-04-01',
+                    color: '#198754'
+                },
+                {
+                    title: 'Hadir',
+                    start: '2026-04-02',
+                    color: '#198754'
+                },
+                {
+                    title: 'Hadir',
+                    start: '2026-04-03',
                     color: '#198754'
                 },
                 {
@@ -135,16 +83,17 @@
                     color: '#198754'
                 },
                 {
-                    title: 'Sakit',
+                    title: 'Hadir',
                     start: '2026-04-05',
-                    end: '2026-04-07',
-                    color: '#ffc107',
-                    textColor: '#000'
+                    color: '#198754'
                 },
                 {
-                    title: 'Hadir',
-                    start: '2026-04-07',
-                    color: '#198754'
+                    title: 'Sakit',
+                    start: '2026-04-06',
+                    end: '2026-04-08',
+                    color: '#ffc107',
+                    textColor: '#000',
+                    keterangan: 'Izin Sakit (Demam)'
                 },
                 {
                     title: 'Hadir',
@@ -260,26 +209,117 @@
                     title: 'Hadir',
                     start: '2026-04-30',
                     color: '#198754'
+                },
+                {
+                    title: 'Hadir',
+                    start: '2026-05-01',
+                    color: '#198754'
+                },
+                {
+                    title: 'Hadir',
+                    start: '2026-05-02',
+                    color: '#198754'
                 }
-            ]
+            ];
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'id',
+                height: 'auto',
+                headerToolbar: {
+                    left: 'title',
+                    center: '',
+                    right: 'today prev,next'
+                },
+                events: dataEvents,
+
+                datesSet: function(info) {
+                    document.getElementById('ringkasan-title').innerText = 'Ringkasan ' + calendar.view
+                        .title;
+
+                    var hadirCount = 0;
+                    var izinCount = 0;
+                    var listCatatanHtml = ''; // Penampung HTML catatan
+
+                    var currentMonth = calendar.getDate().getMonth();
+                    var currentYear = calendar.getDate().getFullYear();
+
+                    dataEvents.forEach(function(event) {
+                        var eventStart = new Date(event.start);
+
+                        if (eventStart.getMonth() === currentMonth && eventStart
+                            .getFullYear() === currentYear) {
+                            if (event.title === 'Hadir') {
+                                hadirCount++;
+                            } else if (event.title === 'Sakit' || event.title === 'Izin') {
+                                var durasi = 1;
+                                var tglTampil = '';
+
+                                if (event.end) {
+                                    var start = new Date(event.start);
+                                    var end = new Date(event.end);
+                                    durasi = Math.round((end - start) / (1000 * 60 * 60 * 24));
+
+                                    var options = {
+                                        day: '2-digit',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    };
+                                    var tglAkhir = new Date(event.end);
+                                    tglAkhir.setDate(tglAkhir.getDate() -
+                                        1);
+
+                                    tglTampil = start.getDate().toString().padStart(2, '0') +
+                                        ' - ' + tglAkhir.toLocaleDateString('id-ID', options);
+                                } else {
+                                    tglTampil = eventStart.toLocaleDateString('id-ID', {
+                                        day: '2-digit',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    });
+                                }
+
+                                izinCount += durasi;
+
+                                // Tambahkan ke list catatan
+                                listCatatanHtml += `
+                                <div class="border-start border-3 border-warning ps-3 mb-3">
+                                    <p class="mb-1 fw-bold small">${tglTampil}</p>
+                                    <p class="text-muted small mb-0">${event.keterangan || event.title}</p>
+                                </div>`;
+                            }
+                        }
+                    });
+
+                    // Update Ringkasan Angka
+                    document.getElementById('total-hadir').innerText = hadirCount + ' Hari';
+                    document.getElementById('total-izin').innerText = izinCount + ' Hari';
+
+                    // Update List Catatan: Jika kosong tampilkan "-"
+                    var catatanContainer = document.getElementById('catatan-list');
+                    if (catatanContainer) {
+                        catatanContainer.innerHTML = listCatatanHtml ||
+                            '<p class="text-muted small text-center mb-0">-</p>';
+                    }
+                }
+            });
+            calendar.render();
         });
-        calendar.render();
-    });
-</script>
+    </script>
 
-<style>
-    /* Agar header hari tidak terlalu sempit karena namanya panjang */
-    .fc-col-header-cell-cushion {
-        text-transform: capitalize;
-        padding: 10px 0 !important;
-        font-size: 0.9rem;
-        text-decoration: none !important;
-        color: #444;
-    }
+    <style>
+        /* Agar header hari tidak terlalu sempit karena namanya panjang */
+        .fc-col-header-cell-cushion {
+            text-transform: capitalize;
+            padding: 10px 0 !important;
+            font-size: 0.9rem;
+            text-decoration: none !important;
+            color: #444;
+        }
 
-    /* Biar angka tanggal tetap bersih tanpa garis bawah */
-    .fc-daygrid-day-number {
-        text-decoration: none !important;
-        padding: 5px 10px !important;
-    }
-</style>
+        /* Biar angka tanggal tetap bersih tanpa garis bawah */
+        .fc-daygrid-day-number {
+            text-decoration: none !important;
+            padding: 5px 10px !important;
+        }
+    </style>

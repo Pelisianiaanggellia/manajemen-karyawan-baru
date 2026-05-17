@@ -7,16 +7,15 @@
     <title>Dashboard Karyawan - PT MAS</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
-
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body {
             margin: 0;
             padding: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("{{ asset('images/bg4.jpg') }}");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("{{ asset('images/bg1.jpg') }}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -37,7 +36,7 @@
 
         .navbar {
             background: #ffffff;
-            border-bottom: 2px solid #28a745;
+            border-bottom: 2px solid #2D6A3E;
         }
 
         .profile-header {
@@ -60,7 +59,7 @@
         .avatar {
             width: 40px;
             height: 40px;
-            background: #28a745;
+            background: #2D6A3E;
             color: white;
             border-radius: 50%;
             display: flex;
@@ -69,20 +68,22 @@
             font-weight: bold;
         }
 
-        /* --- BAHASA --- */
-        .btn-lang {
-            width: 40px !important;
-            height: 35px !important;
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600 !important;
-            padding: 0 !important;
-            transition: all 0.2s ease;
+        /* --- PENILAIAN KINERJA --- */
+        .nav-performance-card:hover {
+            background-color: #ffffff !important;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08) !important;
+            transform: translateY(-1px);
+            border-color: #198754 !important;
         }
 
-        .btn-lang:hover {
+        /* --- PROFIL --- */
+        .nav-profile-link:hover .profile-avatar {
             transform: scale(1.05);
+            box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.1);
+        }
+
+        .nav-profile-link:hover h6 {
+            color: #198754 !important;
         }
 
         /* --- CHATBOT AI --- */
@@ -118,13 +119,13 @@
             right: -2px;
             width: 15px;
             height: 15px;
-            background: #28a745;
+            background: #2D6A3E;
             border: 3px solid white;
             border-radius: 50%;
         }
 
         .btn-ai-action {
-            background: linear-gradient(135deg, #28a745);
+            background: linear-gradient(135deg, #2D6A3E);
             color: white;
             border: none;
             border-radius: 12px;
@@ -140,7 +141,6 @@
         }
 
         /* --- KALENDER --- */
-        /* border utama pada grid */
         .fc-theme-standard .fc-scrollgrid {
             border: 1.5px solid #888888 !important;
         }
@@ -227,42 +227,60 @@
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="{{ asset('images/logo.jpg') }}" alt="Logo" width="40" height="40" class="me-2">
                 <span class="fw-bold text-success">MUKTI PLANTATION</span>
-            </a>
-            <div class="ms-auto d-flex align-items-center">
-                <a href="?lang=id"
-                    class="btn btn-sm btn-lang {{ app()->getLocale() == 'id' ? 'btn-success' : 'btn-outline-success' }} me-2">
-                    ID
-                </a>
 
-                <a href="?lang=en"
-                    class="btn btn-sm btn-lang {{ app()->getLocale() == 'en' ? 'btn-success' : 'btn-outline-secondary' }} me-3">
-                    EN
-                </a>
-            </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <a href="{{ route('kinerja.index') }}"
+                        class="btn d-flex align-items-center px-3 nav-performance-card"
+                        style="background: #ffffff; border-radius: 10px; height: 46px; text-decoration: none; border: 1px solid #f0f0f0; transition: all 0.3s ease;">
 
-            <div class="dropdown border-start ps-3">
-                <div class="d-flex align-items-center" id="dropdownProfile" data-bs-toggle="dropdown"
-                    style="cursor: pointer;">
-                    <div class="text-end me-2">
-                        <div class="fw-bold small">Andi Wijaya</div>
-                        <div class="text-muted" style="font-size: 10px;">NIK: 2024001</div>
+                        <div class="rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 32px; height: 32px; font-size: 18px; background-color: #f8f9fa !important;">
+                            🏅
+                        </div>
+
+                        <div class="ms-2 d-flex flex-column align-items-start">
+                            <span class="fw-bold" style="color: #2d3436; font-size: 12px; line-height: 1.1;">Penilaian
+                                Kinerja</span>
+                        </div>
+                    </a>
+
+                    <div class="mx-3" style="border-left: 1px solid #dee2e6; height: 45px;"></div>
+
+                    <div class="dropdown">
+                        <div class="d-flex align-items-center nav-profile-link" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="cursor: pointer; transition: all 0.2s;">
+                            <div class="text-end me-2">
+                                <h6 class="mb-0 fw-bold" style="font-size: 13px; color: #2d3436;">Andi Wijaya</h6>
+                                <small class="text-muted" style="font-size: 11px;">NIK: 2024001</small>
+                            </div>
+                            <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm profile-avatar"
+                                style="width: 35px; height: 35px; font-size: 12px; border: 1px solid #fff;">
+                                AW
+                            </div>
+                        </div>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 py-1"
+                            style="border-radius: 10px; min-width: 160px;">
+                            <li>
+                                <a class="dropdown-item py-1 px-3" href="#" style="font-size: 14px;">
+                                    <i class="bi bi-gear me-2"></i> Pengaturan
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider my-1">
+                            </li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" class="m-0">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger py-1 px-3"
+                                        style="font-size: 14px;">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Keluar
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="avatar">AW</div>
                 </div>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                    <li><a class="dropdown-item" href="#">⚙️ Pengaturan Profil</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item text-danger">🚪 Keluar</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </nav>
 
     <div class="container">
@@ -276,8 +294,12 @@
                     class="btn btn-light d-flex align-items-center gap-3 px-3 py-2 border-0 shadow-sm rounded-3"
                     data-bs-toggle="modal" data-bs-target="#calendarModal">
                     <div class="text-end">
-                        <h6 class="mb-0 fw-bold">1 Mei 2026</h6>
-                        <small class="text-danger fw-bold" style="font-size: 0.7rem;">Hari Buruh (Libur)</small>
+                        <h6 class="fw-bold mb-0">
+                            {{ \Carbon\Carbon::now()->translatedFormat('j F Y') }}
+                        </h6>
+                        <p class="text-danger small mb-0">
+                            Hari Ini
+                        </p>
                     </div>
                     <div class="fs-2">📅</div>
                 </button>
@@ -299,7 +321,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span class="text-muted small">Jam Masuk:</span>
-                                    <span class="fw-bold small">06:30 WIB</span>
+                                    <span class="fw-bold small">07:00 WIB</span>
                                 </div>
                             </div>
                             <div class="btn btn-outline-success w-100 mt-3">
@@ -322,7 +344,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span class="text-muted small">Total Izin Bln Ini:</span>
-                                    <span class="fw-bold small">2 Hari</span>
+                                    <span class="fw-bold small">1 Kali</span>
                                 </div>
                             </div>
 
@@ -334,115 +356,124 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card p-4 menu-card shadow-sm h-100">
-                        <div class="fs-1 mb-2">🏢</div>
-                        <h5 class="fw-bold">Aturan Perusahaan</h5>
-                        <p class="text-muted small">Kebijakan operasional kebun.</p>
-                        <button class="btn btn-outline-secondary w-100 mt-2">Lihat Aturan</button>
+                    <div class="card p-4 menu-card shadow-sm h-100 border-0 rounded-0">
+                        <div class="card-body text-center p-0">
+                            <div class="fs-1 mb-2">🏢</div>
+
+                            <h5 class="fw-bold">Aturan Perusahaan</h5>
+
+                            <p class="text-muted small mb-4 mt-3">
+                                Pedoman resmi mengenai kebijakan operasional, kode etik, dan hak kewajiban karyawan PT
+                                MAS.
+                            </p>
+                        </div>
+
+                        <a href="{{ url('/aturan') }}" class="btn btn-outline-dark w-100  w-100 mt-3">
+                            Lihat Aturan
+                        </a>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal fade" id="calendarModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content border-0 shadow-lg">
-                        <div class="modal-header border-0 bg-light">
-                            <h5 class="modal-title fw-bold">📅 Kalender Kerja PT MAS</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-3">
-                            <div id='calendar'></div>
-                            <div class="alert alert-info mt-3 small" id="info-libur">
-                                <strong>Info:</strong> Sedang memuat data libur...
+                <div class="modal fade" id="calendarModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content border-0 shadow-lg">
+                            <div class="modal-header border-0 bg-light">
+                                <h5 class="modal-title fw-bold">📅 Kalender Kerja PT MAS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-3">
+                                <div id='calendar'></div>
+                                <div class="alert alert-info mt-3 small" id="info-libur">
+                                    <strong>Info:</strong> Sedang memuat data libur...
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container mt-4 mb-5">
-                <div class="bot-card-modern shadow-sm">
-                    <div class="d-flex align-items-center gap-4">
-                        <div class="bot-icon-wrapper">
-                            <span class="fs-2">🤖</span>
-                            <div class="online-indicator"></div>
+                <div class="container mt-4 mb-5">
+                    <div class="bot-card-modern shadow-sm">
+                        <div class="d-flex align-items-center gap-4">
+                            <div class="bot-icon-wrapper">
+                                <span class="fs-2">🤖</span>
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1 text-dark">Asisten AI MUKTI</h5>
+                                <p class="mb-0 text-muted small">Tanyakan data diri, aturan lembur, atau kebijakan
+                                    kebun di
+                                    sini.
+                                </p>
+                            </div>
+                            <button class="btn btn-ai-action px-4 py-2">
+                                Tanya AI
+                            </button>
                         </div>
-                        <div class="flex-grow-1">
-                            <h5 class="fw-bold mb-1 text-dark">Asisten AI MUKTI</h5>
-                            <p class="mb-0 text-muted small">Tanyakan data diri, aturan lembur, atau kebijakan kebun di
-                                sini.
-                            </p>
-                        </div>
-                        <button class="btn btn-ai-action px-4 py-2">
-                            Tanya AI
-                        </button>
                     </div>
                 </div>
-            </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var calendarEl = document.getElementById('calendar');
+                        var infoLiburEl = document.getElementById('info-libur');
+                        var calendar;
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    var calendarEl = document.getElementById('calendar');
-                    var infoLiburEl = document.getElementById('info-libur');
-                    var calendar;
-
-                    calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        height: 'auto',
-                        locale: 'id',
-                        dayHeaderFormat: {
-                            weekday: 'long'
-                        },
-                        headerToolbar: {
-                            left: '',
-                            center: 'prev,title,next',
-                            right: 'today'
-                        },
-                        locale: 'id',
-                        events: [{
-                                start: '2026-05-01',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
+                        calendar = new FullCalendar.Calendar(calendarEl, {
+                            initialView: 'dayGridMonth',
+                            height: 'auto',
+                            locale: 'id',
+                            dayHeaderFormat: {
+                                weekday: 'long'
                             },
-                            {
-                                start: '2026-05-14',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
+                            headerToolbar: {
+                                left: '',
+                                center: 'prev,title,next',
+                                right: 'today'
                             },
-                            {
-                                start: '2026-05-15',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
-                            },
-                            {
-                                start: '2026-05-27',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
-                            },
-                            {
-                                start: '2026-05-28',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
-                            },
-                            {
-                                start: '2026-05-31',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
-                            },
-                            {
-                                start: '2026-06-01',
-                                display: 'background',
-                                backgroundColor: '#ff0000'
-                            }
-                        ],
-                        datesSet: function(info) {
-                            var title = calendar.view.title;
-                            if (title.includes("Mei")) {
-                                infoLiburEl.innerHTML = `
+                            locale: 'id',
+                            events: [{
+                                    start: '2026-05-01',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                },
+                                {
+                                    start: '2026-05-14',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                },
+                                {
+                                    start: '2026-05-15',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                },
+                                {
+                                    start: '2026-05-27',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                },
+                                {
+                                    start: '2026-05-28',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                },
+                                {
+                                    start: '2026-05-31',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                },
+                                {
+                                    start: '2026-06-01',
+                                    display: 'background',
+                                    backgroundColor: '#ff0000'
+                                }
+                            ],
+                            datesSet: function(info) {
+                                var title = calendar.view.title;
+                                if (title.includes("Mei")) {
+                                    infoLiburEl.innerHTML = `
                             <div class="text-muted small fw-bold mb-2" style="letter-spacing: 1px;">AGENDA LIBUR NASIONAL</div>
                             <div class="holiday-list">
                                 <div class="holiday-item">
@@ -470,25 +501,25 @@
                                     <div class="holiday-name">Hari Raya Waisak</div>
                                 </div>
                             </div>`;
-                            } else {
-                                infoLiburEl.innerHTML = `
+                                } else {
+                                    infoLiburEl.innerHTML = `
                             <div class="text-center py-3 text-muted small">
                                 <em>Tidak ada agenda libur untuk bulan ini.</em>
                             </div>`;
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    // Menangani tampilan kalender di dalam modal agar tidak "blank" atau stuck memuat
-                    var myModalEl = document.getElementById('calendarModal');
-                    myModalEl.addEventListener('shown.bs.modal', function() {
-                        setTimeout(function() {
-                            calendar.render();
-                            calendar.updateSize();
-                        }, 10);
+                        // Menangani tampilan kalender di dalam modal agar tidak "blank" atau stuck memuat
+                        var myModalEl = document.getElementById('calendarModal');
+                        myModalEl.addEventListener('shown.bs.modal', function() {
+                            setTimeout(function() {
+                                calendar.render();
+                                calendar.updateSize();
+                            }, 10);
+                        });
                     });
-                });
-            </script>
+                </script>
 </body>
 
 </html>

@@ -6,16 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('/', function (Request $request) {
-    //  ganti bahasa
-    $lang = $request->query('lang');
-    if ($lang) {
-        App::setLocale($lang);
-        session(['locale' => $lang]);
-    }
-
+Route::get('/', function () {
     return view('beranda');
-});
+})->name('beranda');
+
+// Route untuk fitur Penilaian Kinerja
+Route::get('/penilaian-kinerja', function () {
+    return view('Kinerja');
+})->name('kinerja.index');
 
 // Route untuk halaman Absensi //
 Route::get('/absensi/riwayat', function () {
@@ -31,6 +29,11 @@ Route::get('/pengajuan-izin', function () {
 Route::post('/pengajuan-izin', function () {
     return redirect()->route('pengajuan.riwayat');
 })->name('izin.store');
+
+// Route untuk halaman Aturan perusagan //
+Route::get('/aturan', function () {
+    return view('Aturan');
+});
 
 // LOGOUT
 Route::post('/logout', function (Request $request) {
